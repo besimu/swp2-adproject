@@ -96,7 +96,17 @@ class basicWindow(QWidget):
                         z += 1
 
         button = QPushButton(str(matrix[i][k]))
-                
+
+    for x in matrix:
+        for y in x:
+            button_number = y
+            button = QPushButton()
+            button.setStyleSheet('border-image:url(%s); border :0px;' % number[button_number])
+
+            button.setMinimumSize(60, 60)
+            grid_layout.addWidget(button, x, y)
+            button.clicked.connect(self.button_clicked)
+
     def Btn2_clicked(self):
         Btn2 = self.sender()
 

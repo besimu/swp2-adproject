@@ -62,4 +62,3 @@ def matrix():
         k.append(board[i])
 
     return k
-print(matrix())

@@ -33,7 +33,7 @@ class basicWindow(QWidget):
 
         for x in range(9):
             for y in range(9):
-                button_number = matrix[x][y]
+                button_number = matrix1[x][y]
                 button = QPushButton()
                 button.setStyleSheet('border-image:url(%s); border :0px;' % number[button_number])
 
@@ -54,8 +54,8 @@ class basicWindow(QWidget):
         if item == "어려움":
             difficulty = 2
             
-    x = random.randint(9)
-    y = random.randint(9)
+    x = random.randint(0, 9)
+    y = random.randint(0, 9)
 
     for i in range(9):
         for k in range(9):
@@ -101,11 +101,7 @@ class basicWindow(QWidget):
         for y in x:
             button_number = y
             button = QPushButton()
-            button.setStyleSheet('border-image:url(%s); border :0px;' % number[button_number])
 
-            button.setMinimumSize(60, 60)
-            grid_layout.addWidget(button, x, y)
-            button.clicked.connect(self.button_clicked)
 
     def Btn2_clicked(self):
         Btn2 = self.sender()

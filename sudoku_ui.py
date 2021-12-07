@@ -3,15 +3,9 @@ import random
 from PyQt5.QtWidgets import *
 from number import number
 import sys
-from matrix import matrix1, matrix2, matrix3
-matrix = matrix1
-k = random.randint(1, 4)
-if (k == 1):
-    matrix = matrix1
-elif (k == 2):
-    matrix = matrix2
-else:
-    matrix = matrix3
+from matrix import matrix
+matrix = matrix()
+
 class basicWindow(QWidget):
 
     def __init__(self):

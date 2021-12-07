@@ -4,7 +4,8 @@ from PyQt5.QtWidgets import *
 from number import number
 import sys
 from matrix import matrix
-matrix = matrix()
+matrix1 = matrix()
+difficulty = 0
 
 class basicWindow(QWidget):
 
@@ -32,7 +33,7 @@ class basicWindow(QWidget):
 
         for x in range(9):
             for y in range(9):
-                button_number = matrix[x][y] - 1
+                button_number = matrix[x][y]
                 button = QPushButton()
                 button.setStyleSheet('border-image:url(%s); border :0px;' % number[button_number])
 
@@ -45,10 +46,20 @@ class basicWindow(QWidget):
         items = ("쉬움", "보통", "어려움")
         item, ok = QInputDialog.getItem(self, "난이도", "난이도를 입력하세요", items, 0, False)
         if ok and item:
-            Btn1.setText(item) 
+            Btn1.setText(item)
+        if item == "쉬움":
+            difficulty = 0
+        if item == "보통":
+            difficulty = 1
+        if item == "어려움":
+            difficulty = 2
             
     x = random.randint(9)
     y = random.randint(9)
+
+    for i in range(9):
+        for k in range(9):
+            matrix[i][k] = 0
 
     if difficulty == 0:
         z = 0
@@ -57,14 +68,10 @@ class basicWindow(QWidget):
             matrix[x][y] = matrix1[x][y]
             for a in range(9):
                 for b in range(9):
-                    if matrix[a][b] != '':
+                    if matrix[a][b] != 0:
                         z += 1
 
-        for i in range(9):
-            for k in range(9):
-                if matrix[i][k] == None:
-                    matrix[i][k] == ''
-                button = QPushButton(str(matrix[i][k]))
+        button = QPushButton(str(matrix[i][k]))
 
     if difficulty == 1:
         z = 0
@@ -76,11 +83,7 @@ class basicWindow(QWidget):
                     if matrix[a][b] != '':
                         z += 1
 
-        for i in range(9):
-            for k in range(9):
-                if matrix[i][k] == None:
-                    matrix[i][k] == ''
-                button = QPushButton(str(matrix[i][k]))
+        button = QPushButton(str(matrix[i][k]))
 
     if difficulty == 2:
         z = 0
@@ -92,21 +95,13 @@ class basicWindow(QWidget):
                     if matrix[a][b] != '':
                         z += 1
 
-        for i in range(9):
-            for k in range(9):
-                if matrix[i][k] == None:
-                    matrix[i][k] == ''
-                button = QPushButton(str(matrix[i][k]))
+        button = QPushButton(str(matrix[i][k]))
                 
     def Btn2_clicked(self):
         Btn2 = self.sender()
 
         def cross_check(matrix):
             i = 0  # 하나의 set를 만들기 위한 변수
-            # 3번 반복 :
-            # 1set(0,1,2)행 > 총 3box
-            # 2set(3,4,5)행 > 총 3box
-            # 3set(6,7,8)행 > 총 3box
             for _ in range(3):  # 총 3set
                 s = 0
                 for _ in range(3):  # 한 set당 3개 box가 나옴
@@ -185,5 +180,3 @@ if __name__ == '__main__':
     windowExample = basicWindow()
     windowExample.show()
     sys.exit(app.exec_())
-
-

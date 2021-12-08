@@ -77,34 +77,40 @@ def setdifficulty(matrix, difficulty):
             if play_matrix[x][y] != 0:
                 play_matrix[x][y] == 0
                 z += 1
+                continue
+            elif play_matrix[x][y] == 0:
+                z -= 1
+                continue
 
     if difficulty == 1:
         z = 0
         while z < 29:
-            z = 0
-            for a in range(9):
-                for b in range(9):
-                    if play_matrix[a][b] != '':
-                        z += 1
+            x = random.randint(0, 8)
+            y = random.randint(0, 8)
+            if play_matrix[x][y] != 0:
+                play_matrix[x][y] == 0
+                z += 1
+                continue
+            elif play_matrix[x][y] == 0:
+                z -= 1
+                continue
 
-        for i in range(9):
-            for k in range(9):
-                if play_matrix[i][k] == None:
-                    play_matrix[i][k] == 0
+
 
     if difficulty == 2:
         z = 0
         while z < 22:
-            z = 0
-            for a in range(9):
-                for b in range(9):
-                    if play_matrix[a][b] != '':
-                        z += 1
+            x = random.randint(0, 8)
+            y = random.randint(0, 8)
+            if play_matrix[x][y] != 0:
+                play_matrix[x][y] == 0
+                z += 1
+                continue
+            elif play_matrix[x][y] == 0:
+                z -= 1
+                continue
 
-        for i in range(9):
-            for k in range(9):
-                if play_matrix[i][k] == None:
-                    play_matrix[i][k] == 0
+
     print(play_matrix)
     return play_matrix
 

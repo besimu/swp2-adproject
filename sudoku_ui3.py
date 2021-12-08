@@ -49,12 +49,20 @@ class basicWindow(QWidget):
             xpos += 1
             ypos = 0
 
+
     def Btn1_clicked(self):
         Btn1 = self.sender()
+        self.difficulty = 0
         items = ("쉬움", "보통", "어려움")
-        self.item, ok = QInputDialog.getItem(self, "난이도", "난이도를 입력하세요", items, 0, False)
-        if ok and self.item:
-            Btn1.setText(self.item)
+        item, ok = QInputDialog.getItem(self, "난이도", "난이도를 입력하세요", items, 0, False)
+        if ok and item:
+            Btn1.setText(item)
+        if item == "쉬움":
+            self.difficulty = 0
+        if item == "보통":
+            self.difficulty = 1
+        if item == "어려움":
+            self.difficulty = 2
 
     def button_clicked(self):
         button = self.sender()
@@ -67,51 +75,41 @@ class basicWindow(QWidget):
 
 def setdifficulty(matrix, difficulty):
     play_matrix = matrix
+    print(matrix)
     difficulty = difficulty
 
     if difficulty == 0:
         z = 0
-        while z < 37:
+        while z < 44:
             x = random.randint(0, 8)
             y = random.randint(0, 8)
             if play_matrix[x][y] != 0:
-                play_matrix[x][y] == 0
+                play_matrix[x][y] = 0
                 z += 1
-                continue
-            elif play_matrix[x][y] == 0:
-                z -= 1
                 continue
 
     if difficulty == 1:
         z = 0
-        while z < 29:
+        while z < 52:
             x = random.randint(0, 8)
             y = random.randint(0, 8)
             if play_matrix[x][y] != 0:
-                play_matrix[x][y] == 0
+                play_matrix[x][y] = 0
                 z += 1
                 continue
-            elif play_matrix[x][y] == 0:
-                z -= 1
-                continue
-
 
 
     if difficulty == 2:
         z = 0
-        while z < 22:
+        while z < 59:
             x = random.randint(0, 8)
             y = random.randint(0, 8)
             if play_matrix[x][y] != 0:
-                play_matrix[x][y] == 0
+                play_matrix[x][y] = 0
                 z += 1
                 continue
-            elif play_matrix[x][y] == 0:
-                z -= 1
-                continue
 
-
-    print(play_matrix)
+    print(play_matrix , difficulty)
     return play_matrix
 
     def Btn2_clicked(self):

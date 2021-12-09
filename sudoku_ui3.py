@@ -35,17 +35,21 @@ class basicWindow(QWidget):
         self.setWindowTitle('sudoku')
 
         difficulty = 0
-        play_board = setdifficulty(matrix, difficulty)
+        self.play_board = setdifficulty(matrix, difficulty)
+        self.list = [[j for j in range(0, 9)] for i in range(0, 9)]
+        print(self.play_board)
 
         xpos = 0
         ypos = 0
 
-        for x in play_board:
+        for x in self.play_board:
             for y in x:
                 self.button_number = y
                 self.button = QPushButton()
+                self.button.setText('%s %s' % (xpos, ypos))
                 self.button.setStyleSheet('border-image:url(%s); border :0px;' % number[self.button_number])
                 self.button.setMinimumSize(60, 60)
+
                 grid_layout.addWidget(self.button, xpos, ypos)
                 self.button.clicked.connect(self.button_clicked)
                 ypos += 1
@@ -55,7 +59,7 @@ class basicWindow(QWidget):
 
     def Btn1_clicked(self):
         Btn1 = self.sender()
-        self.difficulty = 0
+
         items = ("쉬움", "보통", "어려움")
         item, ok = QInputDialog.getItem(self, "난이도", "난이도를 입력하세요", items, 0, False)
         if ok and item:
@@ -67,18 +71,25 @@ class basicWindow(QWidget):
         if item == "어려움":
             self.difficulty = 2
 
+
     def button_clicked(self):
         button = self.sender()
+        button_index = button.text()
+
         self.button_number, ok = QInputDialog.getInt(self, '값', '값을 입력하세요')
         if ok and int(self.button_number) < 10:
             button.setStyleSheet('border-image:url(%s); border :0px;' % number[int(self.button_number)])
+            s = button_index.split()
+            xpos = int(s[0])
+            ypos = int(s[1])
+            self.play_board[xpos][ypos] = self.button_number
+            print(self.play_board)
         else:
             QMessageBox.information(self, "QMessageBox", "번호는 10을 넘을 수 없습니다")
 
 
 def setdifficulty(matrix, difficulty):
     play_matrix = matrix
-    print(matrix)
     difficulty = difficulty
 
     if difficulty == 0:
@@ -110,6 +121,7 @@ def setdifficulty(matrix, difficulty):
                 play_matrix[x][y] = 0
                 z += 1
                 continue
+
 
     return play_matrix
 

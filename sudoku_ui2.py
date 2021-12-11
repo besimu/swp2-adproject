@@ -7,7 +7,6 @@ import sys
 from matrix import matrix
 matrix = matrix()
 
-
 class basicWindow(QWidget):
 
     def __init__(self):
@@ -18,30 +17,34 @@ class basicWindow(QWidget):
         difficulty_button = QPushButton("난이도")
         send_button = QPushButton("제출")
         reset_button = QPushButton("초기화")
-        self.time = QLabel("타이머")
+        game_button = QPushButton("게임 시작")
         hboxlayout.addWidget(difficulty_button)
         difficulty_button.clicked.connect(self.Btn1_clicked)
         send_button.clicked.connect(self.send_clicked)
         reset_button.clicked.connect(self.reset_clicked)
+        game_button.clicked.connect(self.game_start)
+
         hboxlayout.addWidget(send_button)
         hboxlayout.addWidget(reset_button)
-        hboxlayout.addWidget(self.time)
+        hboxlayout.addWidget(game_button)
         vboxlayout.addLayout(hboxlayout)
         self.grid_layout = QGridLayout()
         vboxlayout.addLayout(self.grid_layout)
         Outhboxlayout.addLayout(vboxlayout)
         Outhboxlayout.addLayout(self.grid_layout)
 
-
-
         self.setLayout(Outhboxlayout)
         self.setWindowTitle('sudoku')
 
-        difficulty = 0
+        self.difficulty = 0
         print(matrix)
-        self.play_board = setdifficulty(matrix, difficulty)
-        self.origin_borad = self.play_board
-        print(self.play_board)
+
+
+
+    def game_start(self):
+
+        self.play_board = self.setdifficulty()
+        self.origin_board = self.play_board
 
         xpos = 0
         ypos = 0
@@ -127,44 +130,41 @@ class basicWindow(QWidget):
             ypos = 0
 
 
+    def setdifficulty(self):
+        play_matrix = matrix
+
+        if self.difficulty == 0:
+            z = 0
+            while z < 45:
+                x = random.randint(0, 8)
+                y = random.randint(0, 8)
+                if play_matrix[x][y] != 0:
+                    play_matrix[x][y] = 0
+                    z += 1
+                    continue
+
+        if self.difficulty == 1:
+            z = 0
+            while z < 52:
+                x = random.randint(0, 8)
+                y = random.randint(0, 8)
+                if play_matrix[x][y] != 0:
+                    play_matrix[x][y] = 0
+                    z += 1
+                    continue
+
+        if self.difficulty == 2:
+            z = 0
+            while z < 59:
+                x = random.randint(0, 8)
+                y = random.randint(0, 8)
+                if play_matrix[x][y] != 0:
+                    play_matrix[x][y] = 0
+                    z += 1
+                    continue
 
 
-def setdifficulty(matrix, difficulty):
-    play_matrix = matrix
-    difficulty = difficulty
-
-    if difficulty == 0:
-        z = 0
-        while z < 45:
-            x = random.randint(0, 8)
-            y = random.randint(0, 8)
-            if play_matrix[x][y] != 0:
-                play_matrix[x][y] = 0
-                z += 1
-                continue
-
-    if difficulty == 1:
-        z = 0
-        while z < 52:
-            x = random.randint(0, 8)
-            y = random.randint(0, 8)
-            if play_matrix[x][y] != 0:
-                play_matrix[x][y] = 0
-                z += 1
-                continue
-
-    if difficulty == 2:
-        z = 0
-        while z < 59:
-            x = random.randint(0, 8)
-            y = random.randint(0, 8)
-            if play_matrix[x][y] != 0:
-                play_matrix[x][y] = 0
-                z += 1
-                continue
-
-
-    return play_matrix
+        return play_matrix
 
 
 

@@ -76,6 +76,8 @@ class basicWindow(QWidget):
                 self.button.setStyleSheet('border-image:url(%s); border :0px;' % number[self.button_number])
                 self.button.setMinimumSize(60, 60)
                 self.grid_layout.addWidget(self.button, xpos, ypos)
+                if (self.button_number != 0):
+                    self.button.setDisabled(True)
                 self.button.clicked.connect(self.button_clicked)
                 ypos += 1
             xpos += 1
